@@ -508,6 +508,8 @@ export default class ImageViewer extends React.Component<Props, State> {
               imageHeight={height}
               enableSwipeDown={true}
               onSwipeDown={this.handleSwipeDown}
+              minScale={0.6}
+              maxScale={10}
             >
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
