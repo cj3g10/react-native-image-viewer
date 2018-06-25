@@ -445,6 +445,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           onDoubleClick={this.handleDoubleClick}
           enableSwipeDown={true}
           onSwipeDown={this.handleSwipeDown}
+          enableHorizontalBounce={true}
           {...others}
         >
           {children}
@@ -510,6 +511,7 @@ export default class ImageViewer extends React.Component<Props, State> {
               onSwipeDown={this.handleSwipeDown}
               minScale={0.6}
               maxScale={10}
+              enableHorizontalBounce={true}
             >
               {this!.props!.renderImage!(image.props)}
             </ImageZoom>
