@@ -71,6 +71,25 @@ export default class ImageViewer extends React.Component<Props, State> {
     }
   }
 
+  public componentDidUpdate(prevProps: Props) {
+    const updateIndex = this.hasUpdateImage(prevProps.imageUrls, this.props.imageUrls);
+    if (updateIndex != -1) {
+      this!.state!.imageSizes![updateIndex] = {
+        status: 'loading',
+        width: 0,
+        height: 0
+      };
+      this.loadImage(updateIndex, true);
+    }
+  }
+
+  public hasUpdateImage(a: IImageInfo[], b: IImageInfo[]) {
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i].url !== b[i].url) return i;
+    }
+    return -1;
+  }
+
   /**
    * props 有变化时执行
    */
@@ -124,12 +143,12 @@ export default class ImageViewer extends React.Component<Props, State> {
   /**
    * 加载图片，主要是获取图片长与宽
    */
-  public loadImage(index: number) {
+  public loadImage(index: number, force: boolean = false) {
     if (!this!.state!.imageSizes![index]) {
       return;
     }
 
-    if (this.loadedIndex.has(index)) {
+    if (this.loadedIndex.has(index) && !force) {
       return;
     }
     this.loadedIndex.set(index, true);
