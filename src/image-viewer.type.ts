@@ -58,6 +58,8 @@ export class Props {
 
   public style?: ViewStyle = {};
 
+  public enableSwipeDown?: boolean = false;
+
   /**
    * 长按图片的回调
    */
